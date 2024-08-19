@@ -35,6 +35,10 @@ You can install all dependencies using pip:
 ```bash
 pip install yt-dlp moviepy librosa noisereduce soundfile whisper langid translate nltk ffmpeg-python
 ```
+or
+```bash
+pip install -r requirements.txt
+```
 
 Additionally, make sure `ffmpeg` is installed on your system. You can install it via package managers like `apt` on Linux, `brew` on macOS, or download it from [ffmpeg.org](https://ffmpeg.org/download.html).
 
