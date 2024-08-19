@@ -1,0 +1,10 @@
+yt-dlp
+moviepy
+librosa
+noisereduce
+soundfile
+whisper
+langid
+translate
+nltk
+ffmpeg-python
