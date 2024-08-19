@@ -29,9 +29,9 @@ To run GNUrante, you'll need the following Python libraries:
 
 You can install all dependencies using pip:
 
-\`\`\`bash
+```bash
 pip install yt-dlp moviepy librosa noisereduce soundfile whisper langid translate nltk ffmpeg-python
-\`\`\`
+```
 
 Additionally, make sure `ffmpeg` is installed on your system. You can install it via package managers like `apt` on Linux, `brew` on macOS, or download it from [ffmpeg.org](https://ffmpeg.org/download.html).
 
