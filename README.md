@@ -56,9 +56,9 @@ The final video with subtitles will be saved as `video_con_sottotitoli.mp4` in t
 
 ## Example
 
-\`\`\`bash
-python gnurante.py https://www.youtube.com/watch?v=example
-\`\`\`
+```bash
+python gnurante.py https://x.com/{user}/status/{number}
+```
 
 After the script completes, you'll find a new file named `video_con_sottotitoli.mp4` in your directory.
 
