@@ -69,6 +69,30 @@ python gnurante.py https://x.com/{user}/status/{number}
 
 After the script completes, you'll find a new file named `video_con_sottotitoli.mp4` in your directory.
 
+## Customizing Subtitle Language
+
+By default, GNUrante generates subtitles in Italian. However, you can easily customize the script to create subtitles in any language supported by the translation service.
+
+### How to Change the Subtitle Language
+
+To change the subtitle language, simply modify the following line in the script:
+
+translator = Translator(to_lang="it", from_lang=language)
+
+- `to_lang="it"`: Change `"it"` to the code of your desired language (e.g., `"en"` for English, `"es"` for Spanish, `"fr"` for French, etc.).
+- `from_lang=language`: This detects the original language of the video. You can leave this unchanged to automatically detect the source language.
+
+### Example settings Language
+
+If you want to generate subtitles in English instead of Italian, you would modify the line as follows:
+
+translator = Translator(to_lang="en", from_lang=language)
+
+After making this change, the script will generate subtitles in English.
+
+This flexibility allows you to generate subtitles in any language supported by the translation service, making GNUrante a versatile tool for a global audience.
+
+
 ## License
 
 GNUrante is released under the MIT License. See the `LICENSE` file for more details.
