@@ -2,6 +2,9 @@
 
 **GNUrante** is a Python script that simplifies the process of downloading YouTube, X etc ... videos, extracting and cleaning audio, transcribing and translating the audio into Italian, and finally adding subtitles to the video. The script automates these complex tasks, making it easy for anyone to generate videos with subtitles.
 
+![GNUrante Logo](./gnurante-logo.png)
+
+
 ## Features
 
 - **Video Download**: Downloads videos from YouTube using `yt-dlp`.
