@@ -3,7 +3,7 @@ moviepy
 librosa
 noisereduce
 soundfile
-whisper.ai
+whisper
 langid
 translate
 nltk
