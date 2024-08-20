@@ -11,7 +11,6 @@ import soundfile as sf
 import whisper
 import langid
 from translate import Translator
-from nltk.tokenize import sent_tokenize
 import ffmpeg
 import nltk
 
@@ -50,11 +49,15 @@ class VideoProcessor:
 
     def transcribe_audio(self):
         model = whisper.load_model("large")
-        result = model.transcribe(self.cleaned_audio_file)
-        text = result['text']
+        result = model.transcribe(self.cleaned_audio_file, verbose=True)
 
+        # Salva il testo completo
+        text = result['text']
         with open(self.transcription_file, "w") as file:
             file.write(text)
+        
+        # Salva i segmenti per i timestamp
+        self.segments = result['segments']
         print("Trascrizione completata con successo!")
 
     def translate_text(self):
@@ -66,33 +69,32 @@ class VideoProcessor:
 
         translator = Translator(to_lang="it", from_lang=language)
 
-        translated_text = " ".join(translator.translate(block) for block in self.split_text(text_content))
+        sentences = [translator.translate(segment['text']) for segment in self.segments]
+
+        translated_text = " ".join(sentences)
 
         with open(self.translation_file, 'w') as file:
             file.write(translated_text)
+
+        # Salva le traduzioni per i sottotitoli
+        for i, segment in enumerate(self.segments):
+            self.segments[i]['translated_text'] = sentences[i]
+
         print("Traduzione completata con successo!")
 
     def create_srt_file(self):
-        video = VideoFileClip(self.video_file)
-        video_duration = video.duration
-
-        with open(self.translation_file, 'r') as file:
-            translated_text = file.read()
-
-        sentences = sent_tokenize(translated_text)
-        interval = video_duration / len(sentences)
-
         with open(self.srt_file, 'w') as f:
-            for i, sentence in enumerate(sentences):
-                start_time = i * interval
-                end_time = (i + 1) * interval
+            for i, segment in enumerate(self.segments):
+                start_time = segment['start']
+                end_time = segment['end']
+                text = segment['translated_text']
 
                 start_time_formatted = self.format_time(start_time)
                 end_time_formatted = self.format_time(end_time)
 
                 f.write(f"{i + 1}\n")
                 f.write(f"{start_time_formatted} --> {end_time_formatted}\n")
-                f.write(f"{sentence}\n\n")
+                f.write(f"{text}\n\n")
 
     def add_subtitles_to_video(self):
         ffmpeg.input(self.video_file).output(self.output_video_file, vf=f"subtitles={self.srt_file}").run()
@@ -111,10 +113,6 @@ class VideoProcessor:
         for file in files_to_delete:
             if os.path.exists(file):
                 os.remove(file)
-
-    @staticmethod
-    def split_text(text, max_length=500):
-        return [text[i:i + max_length] for i in range(0, len(text), max_length)]
 
     @staticmethod
     def format_time(seconds):
