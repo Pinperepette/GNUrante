@@ -47,7 +47,7 @@ Additionally, make sure `ffmpeg` is installed on your system. You can install it
 To use GNUrante, simply provide the URL of the YouTube video as a command-line argument:
 
 ```bash
-python gnurante.py <video_url>
+python gnurante.py video_url
 ```
 
 The script will:
