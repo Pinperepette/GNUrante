@@ -33,7 +33,7 @@ To run GNUrante, you'll need the following Python libraries:
 You can install all dependencies using pip:
 
 ```bash
-pip install yt-dlp moviepy librosa noisereduce soundfile whisper langid translate nltk ffmpeg-python
+pip install yt-dlp moviepy librosa noisereduce soundfile openai-whisper langid translate nltk ffmpeg-python
 ```
 or
 ```bash
