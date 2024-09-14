@@ -51,17 +51,15 @@ class VideoProcessor:
         model = whisper.load_model("large")
         result = model.transcribe(self.cleaned_audio_file, verbose=True)
 
-        # Salva il testo completo
         text = result['text']
-        with open(self.transcription_file, "w") as file:
+        with open(self.transcription_file, "w", encoding="utf-8") as file:
             file.write(text)
         
-        # Salva i segmenti per i timestamp
         self.segments = result['segments']
         print("Trascrizione completata con successo!")
 
     def translate_text(self):
-        with open(self.transcription_file, 'r') as file:
+        with open(self.transcription_file, 'r', encoding="utf-8") as file:
             text_content = file.read()
 
         language, confidence = langid.classify(text_content)
@@ -73,17 +71,16 @@ class VideoProcessor:
 
         translated_text = " ".join(sentences)
 
-        with open(self.translation_file, 'w') as file:
+        with open(self.translation_file, 'w', encoding="utf-8") as file:
             file.write(translated_text)
 
-        # Salva le traduzioni per i sottotitoli
         for i, segment in enumerate(self.segments):
             self.segments[i]['translated_text'] = sentences[i]
 
         print("Traduzione completata con successo!")
 
     def create_srt_file(self):
-        with open(self.srt_file, 'w') as f:
+        with open(self.srt_file, 'w', encoding="utf-8") as f:
             for i, segment in enumerate(self.segments):
                 start_time = segment['start']
                 end_time = segment['end']
