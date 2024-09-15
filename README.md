@@ -32,22 +32,20 @@ To run GNUrante, you'll need the following Python libraries:
 
 You can install all dependencies using pip:
 
-```bash
-pip install yt-dlp moviepy librosa noisereduce soundfile openai-whisper langid translate nltk ffmpeg-python
-```
 or
 ```bash
 pip install -r requirements.txt
 ```
 
 Additionally, make sure `ffmpeg` is installed on your system. You can install it via package managers like `apt` on Linux, `brew` on macOS, or download it from [ffmpeg.org](https://ffmpeg.org/download.html).
+For Windows you can use `winget install Gyan.FFmpeg`
 
 ## Usage
 
 To use GNUrante, simply provide the URL of the YouTube video as a command-line argument:
 
 ```bash
-python gnurante.py video_url
+python gnurante.py video_url [--resolution (desired res. XxY)] [--gpu (nvidia or amd)]
 ```
 
 The script will:
@@ -64,7 +62,7 @@ The final video with subtitles will be saved as `video_con_sottotitoli.mp4` in t
 ## Example
 
 ```bash
-python gnurante.py https://x.com/{user}/status/{number}
+python gnurante.py https://x.com/{user}/status/{number} --resolution 1920x1080 --gpu amd 
 ```
 
 After the script completes, you'll find a new file named `video_con_sottotitoli.mp4` in your directory.
